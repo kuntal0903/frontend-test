@@ -1,0 +1,236 @@
+/* ================================================================
+   GLOBAL DESIGN SYSTEM — ASM Dashboard
+   Attack Surface Management | Dark Cybersecurity Theme
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS Variables / Design Tokens ─────────────────────────────── */
+
+/* ════════════════════════════════════════════════════════════════
+   THEME: Dark (default)
+   Deep navy cybersecurity aesthetic
+════════════════════════════════════════════════════════════════ */
+:root,
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-base:        #060b14;
+  --bg-surface:     #0d1626;
+  --bg-raised:      #111d35;
+  --bg-card:        #0d1626;
+  --bg-elevated:    #172240;
+  --bg-hover:       #1e2d52;
+
+  /* Accents */
+  --accent-blue:    #3b82f6;
+  --accent-blue-dim:#1d4ed8;
+  --accent-cyan:    #06b6d4;
+  --accent-purple:  #8b5cf6;
+  --neon-blue:      #60a5fa;
+  --neon-cyan:      #22d3ee;
+
+  /* Text */
+  --text-primary:   #f0f4ff;
+  --text-secondary: #8da2c0;
+  --text-muted:     #4a6080;
+  --text-accent:    #60a5fa;
+
+  /* Borders */
+  --border:         rgba(59, 130, 246, 0.12);
+  --border-hover:   rgba(59, 130, 246, 0.35);
+  --border-active:  rgba(59, 130, 246, 0.7);
+
+  /* Glows */
+  --glow-blue:      0 0 20px rgba(59, 130, 246, 0.25);
+  --glow-cyan:      0 0 20px rgba(6, 182, 212, 0.25);
+  --glow-critical:  0 0 20px rgba(239, 68, 68, 0.3);
+  --glow-purple:    0 0 20px rgba(139, 92, 246, 0.3);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(59, 130, 246, 0.2);
+  --scrollbar-track: rgba(6, 11, 20, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   THEME: Light
+   Clean, soft-slate high-contrast light mode
+════════════════════════════════════════════════════════════════ */
+[data-theme="light"] {
+  /* Backgrounds — Soft slate for eye comfort */
+  --bg-base:        #f1f5f9;
+  --bg-surface:     #ffffff;
+  --bg-raised:      #f8fafc;
+  --bg-card:        #ffffff;
+  --bg-elevated:    #e2e8f0;
+  --bg-hover:       #cbd5e1;
+
+  /* Accents */
+  --accent-blue:    #2563eb;
+  --accent-blue-dim:#1d4ed8;
+  --accent-cyan:    #0284c7;
+  --accent-purple:  #7c3aed;
+  --neon-blue:      #2563eb;
+  --neon-cyan:      #0284c7;
+
+  /* Text — High Contrast Slate */
+  --text-primary:   #0f172a;
+  --text-secondary: #334155;
+  --text-muted:     #64748b;
+  --text-accent:    #1d4ed8;
+
+  /* Borders */
+  --border:         rgba(15, 23, 42, 0.15);
+  --border-hover:   rgba(37, 99, 235, 0.4);
+  --border-active:  rgba(37, 99, 235, 0.8);
+
+  /* Glows — subtle for light mode */
+  --glow-blue:      0 0 16px rgba(37, 99, 235, 0.12);
+  --glow-cyan:      0 0 16px rgba(2, 132, 199, 0.12);
+  --glow-critical:  0 0 16px rgba(220, 38, 38, 0.12);
+  --glow-purple:    0 0 16px rgba(124, 58, 237, 0.12);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(37, 99, 235, 0.25);
+  --scrollbar-track: rgba(241, 245, 249, 0.9);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   THEME: Blue
+   Electric deep-blue with vivid cyan/indigo accents
+════════════════════════════════════════════════════════════════ */
+[data-theme="blue"] {
+  /* Backgrounds */
+  --bg-base:        #03071e;
+  --bg-surface:     #08103a;
+  --bg-raised:      #0d1a52;
+  --bg-card:        #08103a;
+  --bg-elevated:    #122068;
+  --bg-hover:       #192880;
+
+  /* Accents — more vivid electric blue */
+  --accent-blue:    #4d9fff;
+  --accent-blue-dim:#2563eb;
+  --accent-cyan:    #00d4ff;
+  --accent-purple:  #a78bfa;
+  --neon-blue:      #7bb8ff;
+  --neon-cyan:      #38f0ff;
+
+  /* Text */
+  --text-primary:   #e8f4ff;
+  --text-secondary: #6ba4d8;
+  --text-muted:     #2d5c8e;
+  --text-accent:    #7bb8ff;
+
+  /* Borders */
+  --border:         rgba(77, 159, 255, 0.15);
+  --border-hover:   rgba(77, 159, 255, 0.4);
+  --border-active:  rgba(77, 159, 255, 0.8);
+
+  /* Glows — more vivid */
+  --glow-blue:      0 0 24px rgba(77, 159, 255, 0.35);
+  --glow-cyan:      0 0 24px rgba(0, 212, 255, 0.35);
+  --glow-critical:  0 0 24px rgba(239, 68, 68, 0.4);
+  --glow-purple:    0 0 24px rgba(167, 139, 250, 0.35);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(77, 159, 255, 0.25);
+  --scrollbar-track: rgba(3, 7, 30, 0.6);
+}
+
+/* ── Shared tokens (same for all themes) ────────────────────────── */
+:root {
+  /* Semantic severity colours */
+  --critical:       #ef4444;
+  --critical-dim:   #7f1d1d;
+  --high:           #f97316;
+  --high-dim:       #7c2d12;
+  --medium:         #eab308;
+  --low:            #22c55e;
+  --info:           #3b82f6;
+
+  /* Sidebar */
+  --sidebar-width:           240px;
+  --sidebar-width-collapsed: 68px;
+
+  /* Spacing */
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  32px;
+  --spacing-2xl: 48px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* ── Light theme body text fix ──────────────────────────────────── */
+[data-theme="light"] body {
+  color: var(--text-primary);
+}
+
+/* ── Reset & Base ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-blue-dim); }
+
+/* Selection */
+::selection { background: rgba(59, 130, 246, 0.3); color: var(--text-primary); }
+
+/* Form inputs, select dropdowns & option readability */
+input, select, textarea, button {
+  font-family: inherit;
+  color: var(--text-primary);
+}
+
+select option {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 8px 12px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/* ── Typography utilities ───────────────────────────────────────── */
+.mono { font-family: 'JetBrains Mono', monospace; }
+.text-primary   { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted     { color: var(--text-muted); }
+.text-accent    { color: var(--text-accent); }
+.text-critical  { color: var(--critical); }
+.text-high      { color: var(--high); }
+.text-medium    { color: var(--medium); }
+.text-low       { color: var(--low); }
