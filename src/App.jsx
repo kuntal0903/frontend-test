@@ -53,10 +53,26 @@ export default function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileOpen,       setMobileOpen]       = useState(false);
   const [notifOpen,        setNotifOpen]        = useState(false);
-  const [activePage, setActivePage] = useState('dashboard');
+  const [activePage,       setActivePage]       = useState('dashboard');
 
   const handleToggleSidebar = useCallback(() => {
     setSidebarCollapsed((prev) => !prev);
+  }, []);
+
+  const handleToggleMobile = useCallback(() => {
+    setMobileOpen((prev) => !prev);
+  }, []);
+
+  const handleCloseMobile = useCallback(() => {
+    setMobileOpen(false);
+  }, []);
+
+  const handleOpenNotifications = useCallback(() => {
+    setNotifOpen((prev) => !prev);
+  }, []);
+
+  const handleCloseNotifications = useCallback(() => {
+    setNotifOpen(false);
   }, []);
 
   const handleNavigate = useCallback((pageId) => {
@@ -64,20 +80,14 @@ export default function App() {
     setMobileOpen(false);
   }, []);
 
-  const handleExport = useCallback(() => {
-    const reportData = {
-      timestamp: new Date().toISOString(),
-      app: 'ASM Shield',
-      exportType: 'Full Surface Report',
-    };
-    const jsonStr = JSON.stringify(reportData, null, 2);
-    const blob    = new Blob([jsonStr], { type: 'application/json' });
-    const url     = URL.createObjectURL(blob);
-    const a       = document.createElement('a');
-    a.href        = url;
-    a.download    = `asm-report-${Date.now()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleExport = useCallback(async (format) => {
+    console.log(`[ASM] Export requested — format: ${format}`);
+    await new Promise((res) => setTimeout(res, 1800));
+    console.log(`[ASM] Export complete`);
+  }, []);
+
+  const handleVulnClick = useCallback(() => {
+    setActivePage('vulnerabilities');
   }, []);
 
   return (
@@ -88,30 +98,32 @@ export default function App() {
         collapsed={sidebarCollapsed}
         onToggleCollapse={handleToggleSidebar}
         mobileOpen={mobileOpen}
-        onCloseMobile={() => setMobileOpen(false)}
+        onCloseMobile={handleCloseMobile}
       />
-
+      <div
+        className={`sidebar-overlay ${mobileOpen ? 'visible' : ''}`}
+        onClick={handleCloseMobile}
+        aria-hidden="true"
+      />
       <div className="main-wrapper">
         <Topbar
           activePage={activePage}
           onNavigate={handleNavigate}
           onToggleSidebar={handleToggleSidebar}
-          onToggleMobile={() => setMobileOpen((prev) => !prev)}
-          onOpenNotifications={() => setNotifOpen((prev) => !prev)}
+          onToggleMobile={handleToggleMobile}
+          onOpenNotifications={handleOpenNotifications}
         />
-
         <main className="main-content">
           <PageRouter
             activePage={activePage}
             onExport={handleExport}
-            onVulnClick={() => handleNavigate('vulnerabilities')}
+            onVulnClick={handleVulnClick}
           />
         </main>
       </div>
-
       <NotificationsPanel
         isOpen={notifOpen}
-        onClose={() => setNotifOpen(false)}
+        onClose={handleCloseNotifications}
         onNavigate={handleNavigate}
       />
     </div>
