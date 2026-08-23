@@ -35,7 +35,6 @@ export default function Dashboard({ onExport, onVulnClick }) {
   const [activeQuickFilter, setActiveQuickFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Modals state
   const [selectedVuln, setSelectedVuln] = useState(null);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [selectedThreat, setSelectedThreat] = useState(null);
@@ -44,7 +43,6 @@ export default function Dashboard({ onExport, onVulnClick }) {
 
   return (
     <div className="page-content dashboard-container">
-      {/* ── Page Header ───────────────────────────────────────────── */}
       <div className="page-header">
         <div className="page-header__left">
           <h1 className="page-header__title">
@@ -67,7 +65,6 @@ export default function Dashboard({ onExport, onVulnClick }) {
         </div>
       </div>
 
-      {/* ── KPI Overview Cards ────────────────────────────────────── */}
       <div className="kpi-grid">
         <KpiCard title="Total Discovered Assets" value="1,428" trend="+12% this week" trendUp={true} color="blue" icon={Globe} />
         <KpiCard title="Critical Vulnerabilities" value="23" trend="-4 since yesterday" trendUp={true} color="red" icon={ShieldAlert} />
@@ -75,7 +72,6 @@ export default function Dashboard({ onExport, onVulnClick }) {
         <KpiCard title="Attack Surface Score" value="82/100" trend="Grade A- (Good)" trendUp={true} color="green" icon={ShieldCheck} />
       </div>
 
-      {/* ── Main Charts & Feed Section ───────────────────────────── */}
       <div className="dashboard-grid">
         <div className="dashboard-chart-card">
           <RiskChart />
@@ -85,10 +81,7 @@ export default function Dashboard({ onExport, onVulnClick }) {
         </div>
       </div>
 
-      {/* ── Mid Section: Top Threat Priority & Recent Assets ─────── */}
       <div className="dashboard-grid-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: 24, marginTop: 24 }}>
-        
-        {/* Priority Threat Matrix */}
         <div className="dash-card">
           <div className="dash-card__header">
             <h3 className="dash-card__title">
@@ -130,7 +123,6 @@ export default function Dashboard({ onExport, onVulnClick }) {
           </div>
         </div>
 
-        {/* Recently Discovered Assets */}
         <div className="dash-card">
           <div className="dash-card__header">
             <h3 className="dash-card__title">
@@ -167,15 +159,12 @@ export default function Dashboard({ onExport, onVulnClick }) {
             ))}
           </div>
         </div>
-
       </div>
 
-      {/* ── Active Vulnerability Inventory Table ─────────────────── */}
       <div style={{ marginTop: 24 }}>
         <VulnerabilityTable onSelectVuln={(vuln) => setSelectedVuln(vuln)} />
       </div>
 
-      {/* ── Interactive Modals ────────────────────────────────────── */}
       {selectedVuln && (
         <VulnerabilityModal vuln={selectedVuln} onClose={() => setSelectedVuln(null)} />
       )}
